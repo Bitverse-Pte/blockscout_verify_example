@@ -15,7 +15,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 /**
  * Mint a single ERC721 which can hold NFTs
  */
-contract NFTVaultETH is AccessControl, Ownable, IERC721Receiver {
+contract NFT is AccessControl, Ownable, IERC721Receiver {
     using Address for address;
     using SafeMath for *;
 

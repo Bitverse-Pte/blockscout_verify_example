@@ -6,53 +6,7 @@
 const hre = require("hardhat");
 const { web3 } = require("hardhat");
 //hre == hardhat eth
-async function  mint_nft_to_account(contract,owner,account,amount){
-  for (i=0;i<amount;i++){
-    await contract.connect(owner).mint(account.address,i,"test");
-  }
 
-}
-
-async function mint_token_to_account(contract,owner,account,amount){
-    await contract.connect(owner).mint(account.address,amount);
-
-}
-
-async function buy_one_nft(valut_contract,token_contract,account1){
-  await token_contract.connect(account1).approve(valut_contract.address,1000000000);
-  await valut_contract.connect(account1).buyOne(account1.address);
-
-}
-
-
-async function set_valut_alive(valut_contract,owner){
-  await valut_contract.connect(owner).setWhiteListStatus(true);
-
-}
-
-
-async function depositeNFT(nft,valut,nft_owner,amount){
-  var list = []
-  for (i=0;i<amount;i++){
-    list.push(i);
-  }
-  var rst = await nft.connect(nft_owner).batchApprove(valut.address,list);
-  // console.log("nft approve rst = ",rst);
-
-  
-  rst = await valut.connect(nft_owner).batchDepositeNFT( nft.address, list);
-  // console.log("nft deposite rst = ",rst);
-}
-
-async function registerWhiteList(contract,account){
-
-  await contract.connect(account).registerWhiteList();
-}
-async function checkWhiteList(contract,account){
-
-  const data = await contract.connect(account).checkWhiteList( account.address);
-  // await console.log("check_white_list:",data)
-}
 
 async function main() {
 
@@ -89,15 +43,6 @@ async function main() {
 
   const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
-  const repeatedGreetings = async () => {
-    await sleep(100000)
-    console.log(1)
-    await sleep(100000)
-    console.log(2)
-    await sleep(100000)
-    console.log(3)
-  }
-  repeatedGreetings()
 
 
 
@@ -109,36 +54,8 @@ async function main() {
       proxy_address,
     ],
   });
-  //
-  // await hre.run("verify:verify",{
-  //   address: nft.address,
-  //
-  // });
-  // await hre.run("verify:verify",{
-  //   address: token.address,
-  //
-  // });
-  //
-  
-  
-  // 将nft铸造到目标账户
-  // await mint_nft_to_account(nft,owner,owner,100);
-  // // mint_token_to_account(token,owner,owner,10000000);
-  // //获取nft合约的approve，并存入nft
-  // await depositeNFT(nft,valut,owner,100);
-  // //将购买用的token铸造到目标账户中
-  // await mint_token_to_account(token,owner,account1,1000000*10**18);
-  // //设置白名单状态
-  // await set_white_list_alive(valut,owner);
-  // //登记白名单
-  // await registerWhiteList(valut,account1);
-  // //检查白名单是否登记成功
-  // await checkWhiteList(valut,account1);
-  // //购买一个nft
-  // await buy_one_nft(valut,token,account1);
 
-  // const data = await nft.connect(account1).balanceOf(account1.address);
-  // console.log("buy rst : ",data);
+  
 
   
 
