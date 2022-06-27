@@ -5,11 +5,11 @@
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
 const { web3 } = require("hardhat");
+
 //hre == hardhat eth
 
 
 async function main() {
-
 
 
   //
@@ -27,7 +27,7 @@ async function main() {
   //   to: "0x23FCB0E1DDbC821Bd26D5429BA13B7D5c96C0DE0",
   //   value: ethers.utils.parseEther("0.01"),
   // });
-  console.log(await web3.eth.getChainId())
+  console.log(await web3.eth.getChainId());
   const proxy_address = "0xcb0eccd1d9c9250855175d849f3efe122c12c0bd";
   const Valut = await hre.ethers.getContractFactory("NFTVaultETH");
 
@@ -39,29 +39,19 @@ async function main() {
 
   // console.log("nft address:",nft.address);
   // console.log("token address:",token.address);
-  console.log("valut address:",valut.address);
+  console.log("valut address:", valut.address);
 
-  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
-
-
+  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 
-  await hre.run("verify:verify",{
+  await hre.run("verify:verify", {
     address: valut.address,
     constructorArguments: [
       proxy_address,
       hre.ethers.utils.parseEther("0.15"),
-      proxy_address,
-    ],
+      proxy_address
+    ]
   });
-
-  
-
-  
-
-
-  
-  
 
 
 }
